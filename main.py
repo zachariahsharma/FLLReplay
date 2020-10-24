@@ -51,13 +51,12 @@ def LineFollow(speed, proportianal_gain, robot, distance):
 
 
 def Step_counter():
-    ev3.speaker.beep()
-    moveTank(300, 30, 950)
+    moveTank(-300, 0, -950)
     wait(500)
     for i in range(0, 2):
-        robot.drive_time(50, 20, 2100)
+        robot.drive_time(-50, 10, 2100)
         robot.stop(Stop.COAST)
-        robot.drive_time(-80, 0, 200)
+        robot.drive_time(80, 0, 200)
         robot.stop(Stop.HOLD)
 
 
@@ -73,7 +72,7 @@ def Treadmill(robot):
     ev3.speaker.beep()
     robot.turn(20)
     robot.straight(130)
-    robot.turn(-20) hey bob
+    robot.turn(-20)
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
     robot.straight(160)
     wait(1000)
@@ -101,10 +100,7 @@ def weightMachine():
 
 
 if __name__ == "__main__":
-    motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
     gyro.reset_angle(0)
-    print(gyro.angle())
-    robot.drive_time(-100, 0, 1600)
     Step_counter()
-    Treadmill(robot)
-    weightMachine()
+    # Treadmill(robot)
+    # weightMachine()
