@@ -73,7 +73,7 @@ def Treadmill(robot):
     ev3.speaker.beep()
     robot.turn(20)
     robot.straight(130)
-    robot.turn(-20)
+    robot.turn(-20) hey bob
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
     robot.straight(160)
     wait(1000)
