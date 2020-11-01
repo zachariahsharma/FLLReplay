@@ -26,3 +26,4 @@ motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
 robot.turn(30)
 robot.straight(-500)
 motor_a.run_angle(1560, 600, then=Stop.HOLD, wait=True)
+
