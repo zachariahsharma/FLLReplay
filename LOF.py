@@ -1,4 +1,5 @@
 #!/usr/bin/env pybricks-micropython
+
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
@@ -47,23 +48,27 @@ def LineFollow(speed, proportianal_gain, robot, distance):
     robot.stop(Stop.HOLD)
 
 
+def dead_stop():
+    robot.stop()
+    motor_b.hold()
+    motor_c.hold()
+
 # Write your program here.
 
 
 def Step_counter():
-    ev3.speaker.beep()
-    moveTank(1500, 20, 810)
+    moveTank(1500, 30, 815)
     dead_stop()
     wait(500)
-    for i in range(0, 4):
-        robot.drive_time(25, 0, 2320)
+    for i in range(0, 5):
+        robot.drive_time(25, 0, 2400)
         robot.stop(Stop.COAST)
         robot.drive_time(-80, 0, 200)
         robot.stop(Stop.HOLD)
 
 
 def Treadmill(robot):
-    moveTank(-300, 110, -150)
+    moveTank(-300, 110, -130)
     robot.turn(120)
     robot.stop()
     motor_b, motor_c = Motor(
@@ -71,41 +76,48 @@ def Treadmill(robot):
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
     LineFollow(100, 1.05, robot, 500)
-    ev3.speaker.beep()
-    robot.turn(20)
-    robot.straight(130)
-    robot.turn(-20)
+    robot.turn(28)
+    robot.straight(121.5)
+    robot.turn(-28)
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
-    robot.straight(160)
+    robot.straight(190)
     wait(1000)
     motor_d.run_time(-200, 10000, then=Stop.COAST, wait=True)
     robot.stop()
 
 
-def weightMachine():
+def slide(robot):
+    robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.CLOCKWISE), Motor(
         Port.C, positive_direction=Direction.CLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.straight(200)
+    robot.straight(220)
     wait(500)
     # robot.stop()
-    print(gyro.angle())
-    ev3.speaker.beep()
     while gyro.angle() < 260:
-        robot.drive(-100, 100)
+        robot.drive(-100, 80)
+    dead_stop()
+    motor_a.run_angle(1500, -1000, then=Stop.HOLD, wait=False)
+    robot.straight(500)
+    dead_stop()
+    robot.turn(130)  # 105
     robot.stop()
-    robot.straight(300)
-    robot.stop()
-    while sonic.distance() > 320:
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
+    while sonic.distance() < 600:
         robot.drive(100, 0)
+    LineFollow(100, 1.05, robot, 300)
 
 
 def main():
-    motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
-    gyro.reset_angle(0)
-    print(gyro.angle())
-    robot.drive_time(-100, 0, 1600)
-    Step_counter()
-    Treadmill(robot)
-    weightMachine()
+    # motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
+    # gyro.reset_angle(0)
+    # print(gyro.angle())
+    # robot.drive_time(-100, 0, 1600)
+    # Step_counter()
+    # Treadmill(robot)
+    # slide(robot)
+    motor_a.run_angle(1500, 1000, then=Stop.HOLD, wait=True)
