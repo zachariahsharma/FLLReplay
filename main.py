@@ -57,7 +57,7 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1500, 15, 825)
+    moveTank(1500, 20, 825)
     dead_stop()
     wait(500)
     for i in range(0, 4):
@@ -99,27 +99,22 @@ def slide(robot):
         robot.drive(-100, 80)
     dead_stop()
     motor_a.run_angle(1500, -1000, then=Stop.HOLD, wait=False)
-    robot.straight(515)
+    robot.straight(500)
     dead_stop()
-    robot.turn(125)  # 105
+    robot.turn(105)  # 105
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.straight(200)
+    LineFollow(40, 1.05, robot, 200)
     robot.turn(70)
     robot.turn(-60)
-    LineFollow(100, 1.05, robot, 25)
-    robot.stop()
-    motor_b.reset_angle(0)
-    motor_c.reset_angle(0)
-    while motor_b.angle() < 375:
-        robot.drive(80, 0)
-    LineFollow(20, 1.05, robot, 25)
+    LineFollow(70, 1.05, robot, 1000)
 
 
-def main():
+
+def main(robot):
     # motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
     gyro.reset_angle(0)
     print(gyro.angle())
@@ -130,4 +125,4 @@ def main():
     # motor_a.run_angle(1500, 1000, then=Stop.HOLD, wait=True)
 
 
-main()
+main(robot)
