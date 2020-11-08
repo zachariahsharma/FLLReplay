@@ -68,7 +68,6 @@ def Step_counter():
 
 
 def Treadmill(robot):
-    print('my name is bob')
     moveTank(-300, 95, -130)
     robot.turn(105)
     robot.stop()
@@ -76,7 +75,7 @@ def Treadmill(robot):
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    LineFollow(70, 1.05, robot, 550)
+    LineFollow(70, 1.05, robot, 200)
     robot.turn(28)
     robot.straight(180)
     robot.turn(-28)
