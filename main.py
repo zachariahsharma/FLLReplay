@@ -57,72 +57,60 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1500, 2 0, 825)
+    moveTank(1500, 20, 825)
     dead_stop()
     wait(500)
-    for i in range(0, 4):
-        robot.drive_time(25, 0, 2400)
-        robot.stop(Stop.COAST)
-        robot.drive_time(-80, 0, 200)
+    for i in range(0, 5):
+        robot.drive_time(25, 0, 2490)
+        robot.stop(Stop.BRAKE)
+        robot.drive_time(-100, 0, 300)
         robot.stop(Stop.HOLD)
 
 
 def Treadmill(robot):
     moveTank(-300, 95, -130)
-    robot.turn(120)
+    robot.turn(115)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    LineFollow(70, 1.05, robot, 520)
+    LineFollow(60, 1.05, robot, 520)
     robot.turn(28)
-    robot.straight(130)
-    robot.turn(-28)
+    robot.straight(140)
+    robot.turn(-33)
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
-    robot.straight(200)
+    robot.straight(120)
     wait(1000)
     motor_d.run_time(-200, 10000, then=Stop.COAST, wait=True)
-    robot.stop()
 
 
 def slide(robot):
-    robot.stop()
-    motor_b, motor_c = Motor(
-        Port.B, positive_direction=Direction.CLOCKWISE), Motor(
-        Port.C, positive_direction=Direction.CLOCKWISE)
-    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.straight(220)
-    wait(500)
-    # robot.stop()
-    while gyro.angle() < 265:
-        robot.drive(-100, 80)
-    dead_stop()
-    # motor_a.run_angle(1500, -1000, then=Stop.HOLD, wait=False)
-    robot.straight(500)
-    dead_stop()
-    robot.turn(130)  # 105
-    robot.stop()
-    motor_b, motor_c = Motor(
-        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
-        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
-    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.straight(200)
-    robot.turn(70)
-    robot.turn(-50)
-    LineFollow(30, 1.05, robot, 100)
-    robot.straight(900)
+
+
+def bench(robot):
+    robot.straight(400)
+    robot.turn(-20)
+    robot.turn(20)
+    robot.straight(-50)
+    robot.turn(-10)
+    robot.straight(150)
+    motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
+    robot.turn(30)
+    motor_a.run_angle(1560, 600, then=Stop.HOLD, wait=False)
+    robot.straight(-500)
+    # motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
 
 
 def main(robot):
-    # motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
+    bench(robot)
+    while len(ev3.buttons.pressed) = 0:
+        pass
+    wait(1000)
     gyro.reset_angle(0)
-    print(gyro.angle())
     robot.drive_time(-100, 0, 1600)
     Step_counter()
     Treadmill(robot)
-    slide(robot)
-    # motor_a.run_angle(1500, 1000, then=Stop.HOLD, wait=True)
 
 
 main(robot)
