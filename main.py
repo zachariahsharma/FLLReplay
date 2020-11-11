@@ -106,7 +106,7 @@ def Bench(robot):
 def Slide(robot):
     motor_b.reset()
     motor_c.reset()
-
+#I like potatwa's
 def main(robot):
     # motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
     gyro.reset_angle(0)
