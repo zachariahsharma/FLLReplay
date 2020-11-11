@@ -7,6 +7,7 @@ from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
+import Bench
 
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
@@ -57,10 +58,10 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1500, 2 0, 825)
+    moveTank(1500, 30, 825)
     dead_stop()
     wait(500)
-    for i in range(0, 4):
+    for i in range(0, 5):
         robot.drive_time(25, 0, 2400)
         robot.stop(Stop.COAST)
         robot.drive_time(-80, 0, 200)
@@ -68,8 +69,8 @@ def Step_counter():
 
 
 def Treadmill(robot):
-    moveTank(-300, 95, -130)
-    robot.turn(120)
+    moveTank(-300, 110, -130)
+    robot.turn(110)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
@@ -77,42 +78,30 @@ def Treadmill(robot):
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
     LineFollow(70, 1.05, robot, 520)
     robot.turn(28)
-    robot.straight(130)
+    robot.straight(135)
     robot.turn(-28)
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
-    robot.straight(200)
+    robot.straight(130)
     wait(1000)
-    motor_d.run_time(-200, 10000, then=Stop.COAST, wait=True)
+    motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
     robot.stop()
+    robot.straight(-200)
+    robot.turn(200)
+    LineFollow(70, 1.05, robot, 1000)
 
 
-def slide(robot):
-    robot.stop()
-    motor_b, motor_c = Motor(
-        Port.B, positive_direction=Direction.CLOCKWISE), Motor(
-        Port.C, positive_direction=Direction.CLOCKWISE)
-    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.straight(220)
-    wait(500)
-    # robot.stop()
-    while gyro.angle() < 265:
-        robot.drive(-100, 80)
-    dead_stop()
-    # motor_a.run_angle(1500, -1000, then=Stop.HOLD, wait=False)
-    robot.straight(500)
-    dead_stop()
-    robot.turn(130)  # 105
-    robot.stop()
-    motor_b, motor_c = Motor(
-        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
-        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
-    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.straight(200)
-    robot.turn(70)
-    robot.turn(-50)
-    LineFollow(30, 1.05, robot, 100)
-    robot.straight(900)
-
+def Bench(robot):
+    robot.straight(400)
+    robot.turn(-20)
+    robot.turn(20)
+    robot.straight(-50)
+    robot.turn(-10)
+    robot.straight(150)
+    motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
+    robot.turn(30)
+    motor_a.run_angle(1560, 600, then=Stop.HOLD, wait=False)
+    robot.straight(-500)
+    # motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
 
 def main(robot):
     # motor_a.run_angle(1560, -1300, then=Stop.HOLD, wait=False)
@@ -121,8 +110,10 @@ def main(robot):
     robot.drive_time(-100, 0, 1600)
     Step_counter()
     Treadmill(robot)
-    slide(robot)
-    # motor_a.run_angle(1500, 1000, then=Stop.HOLD, wait=True)
+    # motor_a.run_angle(1500, 100, then=Stop.HOLD, wait=True)
+    # while len(ev3.buttons.pressed()) != 0:
+    #     print(ev3buttons.pressed())
 
 
 main(robot)
+# Bench(robot)
