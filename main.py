@@ -14,8 +14,10 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # Create your objects here.
 ev3 = EV3Brick()
-motor_b, motor_c, motor_d, motor_a = Motor(
-    Port.B), Motor(Port.C), Motor(Port.D), Motor(Port.A)
+motor_b = Motor(Port.B)
+motor_c = Motor(Port.C)
+motor_d = Motor(Port.D)
+motor_a = Motor(Port.A)
 robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
 color = ColorSensor(Port.S3)
 gyro = GyroSensor(Port.S2)
@@ -69,7 +71,7 @@ def Step_counter():
 
 def Treadmill(robot):
     moveTank(-300, 95, -130)
-    robot.turn(115)
+    robot.turn(112)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
@@ -82,7 +84,7 @@ def Treadmill(robot):
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
     robot.straight(120)
     wait(1000)
-    motor_d.run_time(-200, 10000, then=Stop.COAST, wait=True)
+    motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
 
 
 def bench(robot):
