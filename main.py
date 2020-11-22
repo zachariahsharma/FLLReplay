@@ -101,22 +101,42 @@ def bench(robot):
     # motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
 
 
+def bocciaketball():
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
+    robot.straight(50)
+    motor_a.run_angle(1560, -180, then=Stop.HOLD, wait=False)
+    LineFollow(60, -1.2, robot, 750)
+    robot.turn(-180)
+    robot.straight(-100)
+    motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=True)
+    motor_a.run_angle(1560, 990, then=Stop.HOLD, wait=False)
+    robot.straight(180)
+    robot.turn(60)
+    LineFollow(50, 1.2, robot, 450)
+    robot.turn(40)
+    robot.straight(-50)
+
+
 def main(robot):
-    motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    bench(robot)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    robot.straight(700)
-    robot.straight(-1000)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    wait(500)
-    gyro.reset_angle(0)
-    robot.drive_time(-100, 0, 1000)
-    Step_counter()
-    Treadmill(robot)
+    bocciaketball()
+    # motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # bench(robot)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # robot.straight(700)
+    # robot.straight(-1000)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # wait(500)
+    # gyro.reset_angle(0)
+    # robot.drive_time(-100, 0, 1000)
+    # Step_counter()
+    # Treadmill(robot)
 
 
 main(robot)
