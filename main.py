@@ -101,27 +101,31 @@ def bench(robot):
     # motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
 
 
-def bocciaketball():
+def bocciaketballslide():
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
     robot.straight(50)
-    motor_a.run_angle(1560, -180, then=Stop.HOLD, wait=False)
+    motor_a.run_angle(1560, -130, then=Stop.HOLD, wait=False)
     LineFollow(60, -1.2, robot, 750)
     robot.turn(-180)
-    robot.straight(-100)
-    motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=True)
-    motor_a.run_angle(1560, 990, then=Stop.HOLD, wait=False)
-    robot.straight(180)
+    robot.straight(-165)
+    motor_a.run_angle(1560, -1100, then=Stop.HOLD, wait=True)
+    motor_a.run_angle(1560, 11  50, then=Stop.HOLD, wait=False)
+    robot.straight(200)
     robot.turn(60)
     LineFollow(50, 1.2, robot, 450)
     robot.turn(40)
-    robot.straight(-50)
+    robot.straight(-100)
+    motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
+    robot.straight(-100)
+    wait(2000)
+    robot.straight(-10)
 
 
 def main(robot):
-    bocciaketball()
+    bocciaketballslide()
     # motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
