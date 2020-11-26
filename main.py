@@ -59,7 +59,7 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1500, 20, 825)
+    moveTank(1500, 40, 825)
     dead_stop()
     wait(500)
     for i in range(0, 6):
@@ -71,7 +71,7 @@ def Step_counter():
 
 def Treadmill(robot):
     moveTank(-300, 95, -130)
-    robot.turn(112)
+    robot.turn(105)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
@@ -79,10 +79,10 @@ def Treadmill(robot):
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
     LineFollow(60, 1.05, robot, 520)
     robot.turn(28)
-    robot.straight(140)
+    robot.straight(150)
     robot.turn(-32)
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
-    robot.straight(120)
+    robot.straight(125)
     wait(1000)
     motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
 
@@ -101,22 +101,79 @@ def bench(robot):
     # motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
 
 
-def main(robot):
-    motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    bench(robot)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    robot.straight(700)
-    robot.straight(-1000)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
+def RowMachine(robot):
+    robot.stop()
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.CLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.CLOCKWISE)
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
+    motor_a.run_angle(1560, -500, then=Stop.HOLD, wait=False)
+    robot.straight(200)
     wait(500)
-    gyro.reset_angle(0)
-    robot.drive_time(-100, 0, 1000)
-    Step_counter()
-    Treadmill(robot)
+    # robot.stop()
+    while gyro.angle() < 310:
+        robot.drive(-10, 200)
+    dead_stop()
+    robot.straight(190)
+
+
+def bocciaketballslide():
+    # initializes the motors so forward is backwards
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
+    # initializes the drive base with the new motors
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
+    # moves straight so it doesn't get caught on the inner black line
+    robot.straight(50)
+    # makes the shimmy shammy move to the proper place for basketball no waiting so we can do 2 things at once
+    motor_a.run_angle(1560, -180, then=Stop.HOLD, wait=False)
+    # follows the line to to the boccia/basketball area
+    LineFollow(60, -1.2, robot, 700)
+    robot.turn(-160)
+    robot.straight(-175)
+    motor_a.run_angle(1560, -1100, then=Stop.HOLD, wait=True)
+    motor_a.run_angle(1560, 900, then=Stop.HOLD, wait=True)
+    robot.straight(100)
+    robot.turn(-85)
+    robot.straight(-40)
+    motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=True)
+    robot.straight(-10)
+    motor_a.run_angle(1560, 1150, then=Stop.HOLD, wait=True)
+    # robot.straight(200)
+    # robot.turn(60)
+    # LineFollow(50, 1.2, robot, 450)
+    # robot.turn(40)
+    # robot.straight(-100)
+    # motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
+    # robot.straight(-100)
+    # wait(2000)
+    # robot.straight(-10)
+
+
+def main(robot):
+    bocciaketballslide()
+    # motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # bench(robot)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # robot.straight(700)
+    # robot.straight(-1000)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # wait(500)
+    # gyro.reset_angle(0)
+    # robot.drive_time(-100, 0, 1000)
+    # Step_counter()
+    # Treadmill(robot)
+    # RowMachine(robot)
+    # motor_a.run_angle(1560, 500, then=Stop.HOLD, wait=True)
+    # gyro.reset_angle(0)
+    # while gyro.angle() < 200:
+    #     robot.drive(-10, 200)
+    # bocciaketballslide()
 
 
 main(robot)
