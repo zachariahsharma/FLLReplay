@@ -39,8 +39,8 @@ def moveTank(speed, steering, distance):
 
 
 def LineFollow(speed, proportianal_gain, robot, distance):
-    black = 11
-    white = 90
+    black = 5
+    white = 53
     threshold = (black + white)/2
     robot.reset()
     while robot.distance() < distance:
@@ -70,14 +70,15 @@ def Step_counter():
 
 
 def Treadmill(robot):
-    moveTank(-300, 95, -130)
-    robot.turn(105)
+    moveTank(-300, 110, -150)
+    robot.turn(140)
+    robot.straight(-50)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    LineFollow(60, 1.05, robot, 520)
+    LineFollow(60, 1.05, robot, 480)
     robot.turn(28)
     robot.straight(150)
     robot.turn(-32)
@@ -85,6 +86,11 @@ def Treadmill(robot):
     robot.straight(125)
     wait(1000)
     motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
+    robot.straight(-200)
+    robot.turn(-220)
+    LineFollow(100, 1.0, robot, 1100)
+    robot.turn(-30)
+    robot.straight(500)
 
 
 def bench(robot):
@@ -157,41 +163,57 @@ def bocciaketball():
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
     robot.straight(50)
-    motor_a.run_angle(1560, -130, then=Stop.HOLD, wait=False)
-    LineFollow(60, -1.2, robot, 750)
-    robot.turn(-180)
-    robot.straight(-165)
+    motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=False)
+    LineFollow(50, -1.2, robot, 790)
+    robot.turn(-165)
+    robot.straight(-175)
     motor_a.run_angle(1560, -1100, then=Stop.HOLD, wait=True)
     motor_a.run_angle(1560, 1150, then=Stop.HOLD, wait=False)
     robot.straight(200)
     robot.turn(60)
     LineFollow(50, 1.2, robot, 450)
-    robot.turn(40)
+    robot.turn(30)
     robot.straight(-100)
     motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
     robot.straight(-100)
     wait(2000)
-    robot.straight(-10)
+    robot.straight(-50)
+    wait(1000)
+    robot.straight(200)
+    robot.turn(-100)
+    robot.straight(-300)
+    while True:
+        motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=False)
+        ev3.speaker.say('Pancake Robots are amazing')
+        motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
+        ev3.speaker.say('We are getting down and getting funky')
+        motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=False)
+        ev3.speaker.say(
+            'Did I mention that the Pancake Robots are so amazing?')
+        motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
+        ev3.speaker.say('dancing I might have mentioned')
+        motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=False)
+        ev3.speaker.say('Total awesomeness')
+        motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
+        ev3.speaker.say('Move it!')
 
 
 def main(robot):
-    # bocciaketball()
-    print(color.reflection())
-    # motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
-    # while len(ev3.buttons.pressed()) == 0:
-    #     pass
-    # bench(robot)
-    # while len(ev3.buttons.pressed()) == 0:
-    #     pass
-    # robot.straight(700)
-    # robot.straight(-1000)
-    # while len(ev3.buttons.pressed()) == 0:
-    #     pass
-    # wait(500)
-    # gyro.reset_angle(0)
-    # robot.drive_time(-100, 0, 1000)
-    # Step_counter()
-    # Treadmill(robot)
+    motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
+    while len(ev3.speaker.pressed):
+        pass
+    bench(robot)
+    while len(ev3.buttons.pressed()) == 0:
+        pass
+    wait(500)
+    gyro.reset_angle(0)
+    robot.drive_time(-100, 0, 1000)
+    Step_counter()
+    Treadmill(robot)
+    while len(ev3.buttons.pressed()) == 0:
+        pass
+    bocciaketball()
 
 
 main(robot)
+# print(color.reflection())
