@@ -87,7 +87,7 @@ def Treadmill(robot):
     wait(1000)
     motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
     robot.straight(-200)
-    robot.turn(-220)
+    robot.turn(-210)
     LineFollow(100, 1.0, robot, 1100)
     robot.turn(-30)
     robot.straight(500)
@@ -98,8 +98,8 @@ def bench(robot):
     robot.turn(-20)
     robot.turn(20)
     robot.straight(-50)
-    robot.turn(-20)
-    robot.straight(170)
+    robot.turn(-15)
+    robot.straight(185)
     motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
     robot.turn(35)
     motor_a.run_angle(1560, 700, then=Stop.HOLD, wait=False)
@@ -157,7 +157,8 @@ def bocciaketballslide():
     # robot.straight(-10)
 
 
-def bocciaketball():
+def bocciaketball(robot):
+    robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
@@ -180,7 +181,7 @@ def bocciaketball():
     robot.straight(-50)
     wait(1000)
     robot.straight(200)
-    robot.turn(-100)
+    robot.turn(-80)
     robot.straight(-300)
     while True:
         motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=False)
@@ -200,7 +201,7 @@ def bocciaketball():
 
 def main(robot):
     motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=True)
-    while len(ev3.speaker.pressed):
+    while len(ev3.buttons.pressed()) == 0:
         pass
     bench(robot)
     while len(ev3.buttons.pressed()) == 0:
@@ -212,7 +213,7 @@ def main(robot):
     Treadmill(robot)
     while len(ev3.buttons.pressed()) == 0:
         pass
-    bocciaketball()
+    bocciaketball(robot)
 
 
 main(robot)
