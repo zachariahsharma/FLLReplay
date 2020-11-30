@@ -72,13 +72,13 @@ def Step_counter():
 def Treadmill(robot):
     moveTank(-300, 110, -150)
     robot.turn(140)
-    robot.straight(-50)
+    robot.straight(-70)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    LineFollow(60, 1.05, robot, 480)
+    LineFollow(60, 1.05, robot, 455)
     robot.turn(28)
     robot.straight(150)
     robot.turn(-32)
@@ -88,9 +88,11 @@ def Treadmill(robot):
     motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
     robot.straight(-200)
     robot.turn(-210)
-    LineFollow(100, 1.0, robot, 1100)
-    robot.turn(-30)
-    robot.straight(500)
+    LineFollow(100, 1.0, robot, 400)
+    LineFollow(20, 1.0, robot, 50)
+    robot.straight(1000)
+    # robot.turn(-30)
+    # robot.straight(500)
 
 
 def bench(robot):
@@ -101,7 +103,7 @@ def bench(robot):
     robot.turn(-15)
     robot.straight(185)
     motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
-    robot.turn(35)
+    robot.turn(50)
     motor_a.run_angle(1560, 700, then=Stop.HOLD, wait=False)
     robot.straight(-500)
     # motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
