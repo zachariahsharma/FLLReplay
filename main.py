@@ -49,7 +49,8 @@ def moveTank(speed, steering, distance):
 
     robot.stop(Stop.HOLD)
 
-# this is our line following function which takes in speed, proportianal gain, our robot object, and our distance
+# this is our line following function which takes in 
+# speed, proportianal gain, our robot object, and our distance
 def LineFollow(speed, proportianal_gain, robot, distance):
     black = 5
     white = 53
@@ -61,7 +62,7 @@ def LineFollow(speed, proportianal_gain, robot, distance):
         robot.drive(speed, turn_rate)
     robot.stop(Stop.HOLD)
 
-# this function  
+# this function stops the robot and gets rid of all momentum
 def dead_stop():
     robot.stop()
     motor_b.hold()
@@ -69,7 +70,7 @@ def dead_stop():
 
 # Write your program here.
 
-
+# this function does step counter
 def Step_counter():
     moveTank(1500, 20, 825)
     dead_stop()
@@ -80,7 +81,7 @@ def Step_counter():
         robot.drive_time(-100, 0, 300)
         robot.stop(Stop.HOLD)
 
-
+# this function takes in our robot object and it runs treadmill
 def Treadmill(robot):
     moveTank(-300, 120, -160)
     robot.turn(100)
@@ -104,7 +105,7 @@ def Treadmill(robot):
     robot.turn(5)
     moveTank(1560, 0, 1100)
 
-
+# This function runs bench
 def bench(robot):
     robot.straight(400)
     robot.turn(-20)
@@ -121,7 +122,7 @@ def bench(robot):
     motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
     robot.straight(-500)
 
-
+# this function runs basketball, boccia, slide, and dance
 def bocciaketball(robot):
     robot.stop()
     motor_b, motor_c = Motor(
@@ -153,7 +154,7 @@ def bocciaketball(robot):
         motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=True)
         motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=True)
 
-
+# This function is the logic and runs all of our mission function
 def main(robot):
     motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
     while len(ev3.buttons.pressed()) == 0:
@@ -172,5 +173,5 @@ def main(robot):
         pass
     bocciaketball(robot)
 
-
+# This runs our main function
 main(robot)
