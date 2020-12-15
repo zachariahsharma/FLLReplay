@@ -138,11 +138,13 @@ def bench(robot):
 
 
 def bocciaketball(robot):
-    robot.straight(600)
-    LineFollow(80, -.7, robot, 100)
-    while sonic.distance() < 60:
-        robot.drive(100, 0)
-
+    robot.turn(-10)
+    motor_a.run_angle(1560, -500, then=Stop.HOLD, wait=False)
+    robot.straight(620)
+    robot.turn(50)
+    LineFollow(80, -.9, robot, 200)
+    while sonic.distance() > 400:
+        robot.drive(-100, 0)
     # robot.turn(-150)
     # robot.stop()
     # motor_b, motor_c = Motor(
@@ -200,7 +202,7 @@ def main(robot):
 
 # This runs our main function
 main(robot)
-# print(color.reflection())
+# print(sonic.distance())
 # LineFollow(80, -.7, robot, 1000)
 # robot.stop()
 # motor_b.brake()
