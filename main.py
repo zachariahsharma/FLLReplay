@@ -16,9 +16,9 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 # This object initializes the ev3 brick
 ev3 = EV3Brick()
 # This object initializes the motor on port b
-motor_b = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+motor_b = Motor(Port.B)
 # This object initializes the motor on port c
-motor_c = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+motor_c = Motor(Port.C)
 # This object initializes the motor on port d
 motor_d = Motor(Port.D)
 # This object initializes the motor on port a
@@ -80,7 +80,7 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1500, 20, 825)
+    moveTank(1500, -20, 825)
     dead_stop()
     wait(500)
     for i in range(0, 6):
@@ -178,10 +178,17 @@ def bocciaketball(robot):
 
 # This function is the logic and runs all of our mission function
 
+def boccia2(robot):
+    # Moves robot 1200mm to boccia2
+    robot.straight(1200)
 
+    while robot.distance() < 1000:
+        robot.drive(100, 0)
+    robot.straight(-1200)
+    
 def main(robot):
-    bocciaketball(robot)
-
+    boccia2(robot)
+    # bocciaketball(robot)
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
@@ -191,7 +198,7 @@ def main(robot):
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
     # wait(500)
     # gyro.reset_angle(0)
-    # robot.drive_time(-100, 0, 1000)
+    # robot.straight(-20)
     # Step_counter()
     # Treadmill(robot)
     # motor_a.run_angle(1560, 300, then=Stop.HOLD, wait=True)
@@ -207,3 +214,5 @@ main(robot)
 # robot.stop()
 # motor_b.brake()
 # motor_c.brake()
+# motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
+# robot.straight(80)
