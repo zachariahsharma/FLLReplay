@@ -138,45 +138,24 @@ def bench(robot):
 
 
 def bocciaketball(robot):
+    robot.stop()
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
     robot.turn(-10)
-    motor_a.run_angle(1560, -500, then=Stop.HOLD, wait=False)
+    motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=False)
     robot.straight(620)
-    robot.turn(50)
+    robot.turn(40)
     LineFollow(80, -.9, robot, 200)
-    while sonic.distance() > 400:
+    wait(500)
+    while sonic.distance() > 750:
         robot.drive(-100, 0)
-    # robot.turn(-150)
-    # robot.stop()
-    # motor_b, motor_c = Motor(
-    #     Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
-    #     Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
-    # robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    # robot.straight(50)
-    # motor_a.run_angle(1560, -250, then=Stop.HOLD, wait=False)
-    # LineFollow(50, -1.2, robot, 700)
-    # robot.turn(-145)
-    # robot.straight(-195)
-    # motor_a.run_angle(1560, -950, then=Stop.HOLD, wait=True)
-    # motor_a.run_angle(1560, 900, then=Stop.HOLD, wait=False)
-    # robot.straight(200)
-    # robot.turn(60)
-    # LineFollow(50, 1.1, robot, 450)
-    # robot.turn(30)
-    # robot.straight(-100)
-    # motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=False)
-    # robot.straight(-100)
-    # wait(2000)
-    # robot.straight(-50)
-    # wait(1000)
-    # robot.straight(200)
-    # robot.turn(-80)
-    # robot.straight(-300)
-    # robot.turn(80)
-    # while True:
-    #     motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=True)
-    #     motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=True)
+    # robot.turn(-120)
+
 
 # This function is the logic and runs all of our mission function
+
 
 def boccia2(robot):
     # Moves robot 1200mm to boccia2
@@ -185,10 +164,11 @@ def boccia2(robot):
     while robot.distance() < 1000:
         robot.drive(100, 0)
     robot.straight(-1200)
-    
+
+
 def main(robot):
-    boccia2(robot)
-    # bocciaketball(robot)
+    # boccia2(robot)
+    bocciaketball(robot)
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
@@ -208,8 +188,8 @@ def main(robot):
 
 
 # This runs our main function
-main(robot)
-# print(sonic.distance())
+# main(robot)
+print(sonic.distance())
 # LineFollow(80, -.7, robot, 1000)
 # robot.stop()
 # motor_b.brake()
