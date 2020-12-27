@@ -119,20 +119,28 @@ def Treadmill(robot):
 
 
 def bench(robot):
-    robot.straight(400)
-    robot.turn(-20)
-    robot.turn(20)
-    robot.straight(-100)
-    robot.turn(-60)
-    robot.straight(162.5)
-    robot.turn(60)
-    robot.straight(92.5)
-    motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
-    robot.turn(-20)
-    robot.turn(20)
-    robot.turn(50)
-    motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
-    robot.straight(-500)
+    robot.settings(150, 150, 50, 50)
+    # robot.straight(400)
+    # robot.turn(-20)
+    # robot.turn(20)
+    # robot.straight(-100)
+    # robot.turn(-60)
+    # robot.straight(162.5)
+    # robot.turn(60)
+    # robot.straight(92.5)
+    # motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
+    # robot.turn(-20)
+    # robot.turn(20)
+    # robot.turn(50)
+    # motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
+    # robot.straight(-500)
+    
+    moveTank(150, 5, 275)
+    robot.turn(-25)
+    dead_stop()
+    robot.turn(5)
+    robot.straight(-25)
+    robot.straight(200)
 
 # this function runs basketball, boccia, slide, and dance
 
@@ -159,20 +167,23 @@ def bocciaketball(robot):
 
 def boccia2(robot):
     # Moves robot 1200mm to boccia2
-    robot.straight(1200)
-
-    while robot.distance() < 1000:
-        robot.drive(100, 0)
-    robot.straight(-1200)
+    robot.straight(150)
+    robot.stop()
+    robot.turn(70)
+    dead_stop()
+    robot.settings(1560, -1100, 200, 1)
+    robot.straight(1050)
+    dead_stop()
+    robot.straight(-1100)
 
 
 def main(robot):
     # boccia2(robot)
-    bocciaketball(robot)
+    # bocciaketball(robot)
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
-    # bench(robot)
+    bench(robot)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
@@ -188,8 +199,8 @@ def main(robot):
 
 
 # This runs our main function
-# main(robot)
-print(sonic.distance())
+main(robot)
+# print(sonic.distance())
 # LineFollow(80, -.7, robot, 1000)
 # robot.stop()
 # motor_b.brake()
