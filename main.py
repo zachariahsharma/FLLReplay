@@ -134,7 +134,7 @@ def bench(robot):
     # robot.turn(50)
     # motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
     # robot.straight(-500)
-    
+
     moveTank(150, 5, 275)
     robot.turn(-25)
     dead_stop()
@@ -167,15 +167,16 @@ def bocciaketball(robot):
 
 def boccia2(robot):
     # Moves robot 1200mm to boccia2
-    robot.settings(900, 0, 600, 0)
+    robot.settings(600, 550, 50, 100)
     robot.straight(150)
-    robot.stop()
-    robot.turn(70)
+    robot.turn(56)
     dead_stop()
-    robot.straight(1050)
+    robot.straight(1125)
     dead_stop()
-    robot.straight(-1100)
-
+    robot.settings(100, 100, 50, 100)
+    robot.straight(-200)
+    robot.turn(-10)
+    moveTank(-1560, 0, 500)
 
 def main(robot):
     boccia2(robot)
