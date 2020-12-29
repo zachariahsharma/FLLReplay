@@ -167,23 +167,23 @@ def bocciaketball(robot):
 
 def boccia2(robot):
     # Moves robot 1200mm to boccia2
+    robot.settings(900, 0, 600, 0)
     robot.straight(150)
     robot.stop()
     robot.turn(70)
     dead_stop()
-    robot.settings(1560, -1100, 200, 1)
     robot.straight(1050)
     dead_stop()
     robot.straight(-1100)
 
 
 def main(robot):
-    # boccia2(robot)
+    boccia2(robot)
     # bocciaketball(robot)
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
-    bench(robot)
+    # bench(robot)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
