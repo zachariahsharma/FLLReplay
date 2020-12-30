@@ -119,28 +119,28 @@ def Treadmill(robot):
 
 
 def bench(robot):
-    robot.settings(150, 150, 50, 50)
-    # robot.straight(400)
-    # robot.turn(-20)
-    # robot.turn(20)
-    # robot.straight(-100)
-    # robot.turn(-60)
-    # robot.straight(162.5)
-    # robot.turn(60)
-    # robot.straight(92.5)
-    # motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
-    # robot.turn(-20)
-    # robot.turn(20)
-    # robot.turn(50)
-    # motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
-    # robot.straight(-500)
-
-    moveTank(150, 5, 275)
-    robot.turn(-25)
-    dead_stop()
-    robot.turn(5)
-    robot.straight(-25)
-    robot.straight(200)
+    # robot.settings(150, 150, 50, 50)
+    robot.straight(450)
+    robot.turn(-30)
+    robot.turn(10)
+    robot.straight(-150)
+    robot.turn(-60)
+    robot.straight(142.5)
+    robot.turn(60)
+    motor_a.run_angle(1560, 50, then=Stop.HOLD, wait=True)
+    robot.straight(92.5)
+    motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
+    robot.turn(-20)
+    robot.turn(20)
+    robot.turn(50)
+    motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
+    robot.straight(-500)
+    # moveTank(150, 5, 275)
+    # robot.turn(-25)
+    # dead_stop()
+    # robot.turn(5)
+    # robot.straight(-25)
+    # robot.straight(200)
 
 # this function runs basketball, boccia, slide, and dance
 
@@ -178,13 +178,14 @@ def boccia2(robot):
     robot.turn(-10)
     moveTank(-1560, 0, 500)
 
+
 def main(robot):
-    boccia2(robot)
+    # boccia2(robot)
     # bocciaketball(robot)
-    # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
+    motor_a.run_angle(1560, -300, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
-    # bench(robot)
+    bench(robot)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
