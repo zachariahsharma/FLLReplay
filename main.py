@@ -80,12 +80,12 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1500, -20, 825)
+    moveTank(1560, 10, 825)
     dead_stop()
     wait(500)
-    for i in range(0, 6):
-        robot.drive_time(25, 0, 2490)
-        robot.stop(Stop.BRAKE)
+    for i in range(0, 4):
+        robot.drive_time(100, 0, 2000)
+        robot.stop(Stop.COAST)
         robot.drive_time(-100, 0, 300)
         robot.stop(Stop.HOLD)
 
@@ -101,7 +101,7 @@ def Treadmill(robot):
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
         Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
     robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    LineFollow(60, 1.05, robot, 455)
+    LineFollow(60, .6, robot, 455)
     robot.turn(25)
     robot.straight(140)
     robot.turn(-32)
@@ -140,6 +140,21 @@ def bench(robot):
     # motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
     # robot.straight(-500)
 # this function runs basketball, boccia, slide, and dance
+
+
+def dropCubes():
+    robot.stop()
+    robot.settings(100, 100, 50, -50)
+    robot.drive_time(-100, 0, 3)
+    robot.straight(410)
+    robot.stop()
+    robot.settings(500, 500, 100, -100)
+    robot.straight(-400)
+    # robot.turn(15)
+    # robot.straight(80)
+    # robot.stop()
+    # robot.settings(500, 500, 100, -100)
+    # robot.straight(-400)
 
 
 def bocciaketball(robot):
@@ -181,15 +196,15 @@ def main(robot):
     # bocciaketball(robot)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
-    bench(robot)
+    # bench(robot)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
-    # motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
-    # wait(500)
-    # gyro.reset_angle(0)
-    # robot.straight(-20)
-    # Step_counter()
-    # Treadmill(robot)
+    # dropCubes()
+    wait(500)
+    gyro.reset_angle(0)
+    robot.straight(-20)
+    Step_counter()
+    Treadmill(robot)
     # motor_a.run_angle(1560, 300, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
