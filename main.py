@@ -80,6 +80,7 @@ def dead_stop():
 
 
 def Step_counter():
+    # UR BAD
     robot.stop()
     robot.settings(200, 200, 200, 200)
     robot.straight(200)
