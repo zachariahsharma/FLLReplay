@@ -80,13 +80,19 @@ def dead_stop():
 
 
 def Step_counter():
-    # UR BAD
     robot.stop()
-    robot.settings(200, 200, 200, 200)
+    robot.settings(1400, 1400, 200, 200)
+    robot.straight(300)
+    dead_stop()
+    robot.turn(20)
+    robot.stop()
+    robot.settings(900, 900, 200, 200)
+    robot.straight(900)
+    robot.straight(-300)
+    robot.turn(-40)
     robot.straight(200)
-    robot.stop()
-    robot.settings(1560, 1560, 200, 200)
-    robot.straight(-200)
+    robot.turn(40)
+
     # moveTank(1560, 10, 825)
     # dead_stop()
     # wait(500)
@@ -207,9 +213,9 @@ def main(robot):
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # dropCubes()
-    wait(500)
-    gyro.reset_angle(0)
-    robot.straight(-20)
+    # wait(500)
+    # gyro.reset_angle(0)
+    # robot.straight(-20)
     Step_counter()
     # Treadmill(robot)
     # motor_a.run_angle(1560, 300, then=Stop.HOLD, wait=True)
