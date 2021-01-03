@@ -80,14 +80,20 @@ def dead_stop():
 
 
 def Step_counter():
-    moveTank(1560, 10, 825)
-    dead_stop()
-    wait(500)
-    for i in range(0, 4):
-        robot.drive_time(100, 0, 2000)
-        robot.stop(Stop.COAST)
-        robot.drive_time(-100, 0, 300)
-        robot.stop(Stop.HOLD)
+    robot.stop()
+    robot.settings(200, 200, 200, 200)
+    robot.straight(200)
+    robot.stop()
+    robot.settings(1560, 1560, 200, 200)
+    robot.straight(-200)
+    # moveTank(1560, 10, 825)
+    # dead_stop()
+    # wait(500)
+    # for i in range(0, 4):
+    #     robot.drive_time(100, 0, 2000)
+    #     robot.stop(Stop.COAST)
+    #     robot.drive_time(-100, 0, 300)
+    #     robot.stop(Stop.HOLD)
 
 # this function takes in our robot object and it runs treadmill
 
@@ -204,7 +210,7 @@ def main(robot):
     gyro.reset_angle(0)
     robot.straight(-20)
     Step_counter()
-    Treadmill(robot)
+    # Treadmill(robot)
     # motor_a.run_angle(1560, 300, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
