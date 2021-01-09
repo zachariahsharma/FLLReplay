@@ -131,40 +131,6 @@ def Step_counter(robot):
     LineFollow(60, -.6, robot, 390)
     robot.turn(5)
     moveTank(1560, 0, 1100)
-    # moveTank(1560, 10, 825)
-    # dead_stop()
-    # wait(500)
-    # for i in range(0, 4):
-    #     robot.drive_time(100, 0, 2000)
-    #     robot.stop(Stop.COAST)
-    #     robot.drive_time(-100, 0, 300)
-    #     robot.stop(Stop.HOLD)
-
-    # this function takes in our robot object and it runs treadmill
-
-
-def Treadmill(robot):
-    moveTank(-300, 120, -160)
-    robot.turn(100)
-    robot.straight(-70)
-    robot.stop()
-    motor_b, motor_c = Motor(
-        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
-        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
-    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    LineFollow(60, .6, robot, 455)
-    robot.turn(25)
-    robot.straight(140)
-    robot.turn(-32)
-    motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
-    robot.straight(115)
-    wait(1000)
-    motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
-    robot.straight(-200)
-    robot.turn(-240)
-    LineFollow(60, -1.0, robot, 400)
-    robot.turn(5)
-    moveTank(1560, 0, 1100)
 
 # This function runs bench
 
@@ -179,17 +145,6 @@ def bench(robot):
     motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
     robot.straight(-350)
     robot.turn(-80)
-    # robot.turn(-60)
-    # robot.straight(142.5)
-    # robot.turn(60)
-    # motor_a.run_angle(1560, 50, then=Stop.HOLD, wait=True)
-    # robot.straight(92.5)
-    # motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=True)
-    # robot.turn(-20)
-    # robot.turn(20)
-    # robot.turn(50)
-    # motor_a.run_angle(1560, 800, then=Stop.HOLD, wait=False)
-    # robot.straight(-500)
 # this function runs basketball, boccia, slide, and dance
 
 
@@ -222,6 +177,7 @@ def bocciaketball(robot):
     wait(500)
     while sonic.distance() > 750:
         robot.drive(-100, 0)
+    robot.stop()
     # robot.turn(-120)
 
 
@@ -237,9 +193,13 @@ def boccia2(robot):
     robot.straight(1125)
     dead_stop()
     robot.settings(100, 100, 50, 100)
-    robot.straight(-200)
-    robot.turn(-10)
-    moveTank(-1560, 0, 500)
+    robot.straight(-100)
+    robot.turn(70)
+    robot.straight(2)
+    robot.turn(170)
+
+    # robot.turn(-10)
+    # moveTank(-1560, 0, 500)
 
 
 def main(robot):
@@ -254,12 +214,13 @@ def main(robot):
     # wait(500)
     # gyro.reset_angle(0)
     # robot.straight(-20)
-    Step_counter(robot)
+    # Step_counter(robot)
     # Treadmill(robot)
     # motor_a.run_angle(1560, 300, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # bocciaketball(robot)
+    boccia2(robot)
 
 
 # This runs our main function
