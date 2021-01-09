@@ -79,7 +79,7 @@ def dead_stop():
 # this function does step counter
 
 
-def Step_counter():
+def Step_counter(robot):
     robot.stop()
     robot.settings(1000, 1400, 200, 200)
     robot.straight(300)
@@ -92,17 +92,17 @@ def Step_counter():
     robot.stop()
     robot.straight(500)
     robot.straight(-20)
-    robot.straight(320)
+    robot.straight(235)
     robot.stop()
     robot.settings(900, 900, 200, 200)
     robot.straight(-300)
     robot.turn(-35)
     robot.straight(180)
     robot.turn(35)
-    robot.straight(700)
+    robot.straight(750)
     robot.turn(-100)
     robot.drive_time(-100, 0, 3000)
-    robot.straight(200)
+    robot.straight(195)
     robot.turn(-90)
     motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
     robot.straight(-75)
@@ -116,6 +116,21 @@ def Step_counter():
     motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=False)
     robot.straight(100)
     motor_a.run_angle(1560, 200, then=Stop.HOLD, wait=True)
+    robot.straight(-80)
+    robot.turn(-60)
+    robot.straight(50)
+    motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=True)
+    robot.straight(-100)
+    robot.turn(50)
+    motor_a.run_angle(1560, 200, then=Stop.HOLD, wait=False)
+    robot.stop()
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
+    LineFollow(60, -.6, robot, 390)
+    robot.turn(5)
+    moveTank(1560, 0, 1100)
     # moveTank(1560, 10, 825)
     # dead_stop()
     # wait(500)
@@ -239,7 +254,7 @@ def main(robot):
     # wait(500)
     # gyro.reset_angle(0)
     # robot.straight(-20)
-    Step_counter()
+    Step_counter(robot)
     # Treadmill(robot)
     # motor_a.run_angle(1560, 300, then=Stop.HOLD, wait=True)
     # while len(ev3.buttons.pressed()) == 0:
