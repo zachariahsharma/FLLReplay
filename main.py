@@ -197,6 +197,7 @@ def boccia2(robot):
     dead_stop()
     robot.settings(200, 200, 100, 100)
     robot.straight(-270)
+    # HEY BOB
     robot.turn(130)
     robot.straight(-230)
     robot.straight(150)
