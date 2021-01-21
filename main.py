@@ -121,10 +121,10 @@ def Step_counter(robot):
 
     robot.straight(750)
     robot.stop()
-    robot.settings(900, 900, 200, 200)
+    robot.settings(200, 200, 200, 200)
     robot.turn(-90)
     robot.stop()
-    robot.straight(-170)
+    robot.straight(-190)
     robot.stop()
     robot.settings(100, 100, 200, 200)
     robot.straight(150)
@@ -193,24 +193,6 @@ def dropCubes():
     # robot.straight(-400)
 
 
-def bocciaketball(robot):
-    robot.stop()
-    motor_b, motor_c = Motor(
-        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
-        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
-    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
-    robot.turn(-10)
-    motor_a.run_angle(1560, -600, then=Stop.HOLD, wait=False)
-    robot.straight(620)
-    robot.turn(40)
-    LineFollow(80, -.9, robot, 200)
-    wait(500)
-    while sonic.distance() > 750:
-        robot.drive(-100, 0)
-    robot.stop()
-    # robot.turn(-120)
-
-
 # This function is the logic and runs all of our mission function
 
 
@@ -239,7 +221,7 @@ def boccia2(robot):
     robot.stop()
     robot.straight(-100)
     motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=False)
-    robot.turn(50)
+    robot.turn(70)
     robot.stop()
     motor_b, motor_c = Motor(
         Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
@@ -287,10 +269,10 @@ def main(robot):
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # dropCubes()
-    wait(500)
-    gyro.reset_angle(0)
-    robot.straight(-20)
-    Step_counter(robot)
+    # wait(500)
+    # gyro.reset_angle(0)
+    # robot.straight(-20)
+    # Step_counter(robot)
     robot.stop()
     robot.settings(200, 200, 100, 100)
     while len(ev3.buttons.pressed()) == 0:
@@ -314,3 +296,4 @@ main(robot)
 # gyro.reset_angle(0)
 # gyroFixed(90)
 # gyroFixed(0)
+# robot.straight(1000)
