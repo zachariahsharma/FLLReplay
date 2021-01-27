@@ -249,7 +249,7 @@ def boccia2(robot):
     robot.turn(-135)
     robot.straight(-320)
     robot.turn(-40)
-    robot.straight(170)
+    robot.straight(150)
     motor_a.run_angle(1560, -900, then=Stop.HOLD, wait=False)
     robot.straight(130)
     robot.stop()
@@ -327,19 +327,19 @@ def boccia2(robot):
 def main(robot):
     # boccia2(robot)
     # bocciaketball(robot)
-    robot.stop()
-    robot.settings(1560, -300, 100, 100)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    bench(robot)
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    dropCubes()
-    while len(ev3.buttons.pressed()) == 0:
-        pass
-    wait(500)
-    robot.straight(-20)
-    Step_counter(robot)
+    # robot.stop()
+    # robot.settings(1560, -300, 100, 100)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # bench(robot)
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # dropCubes()
+    # while len(ev3.buttons.pressed()) == 0:
+    #     pass
+    # wait(500)
+    # robot.straight(-20)
+    # Step_counter(robot)
     robot.stop()
     robot.settings(200, 200, 100, 100)
     while len(ev3.buttons.pressed()) == 0:
