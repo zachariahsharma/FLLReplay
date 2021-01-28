@@ -21,18 +21,19 @@ motor_b = Motor(Port.B)
 motor_c = Motor(Port.C)
 # This object initializes the motor on port d
 motor_d = Motor(Port.D)
+# motor_d.run_angle(1560, 1560, then=Stop.HOLD, wait=True)
 # This object initializes the motor on port a
 motor_a = Motor(Port.A)
 # This object initializes the drivebase which is the robot, we can use
 # this to move more accurately straight, this takes in the left and right motors,
 # as well as the diameter of our wheels and the distance each wheel is from each other in millimeters
-robot = DriveBase(motor_b, motor_c, wheel_diameter=94, axle_track=95)
+robot = DriveBase(motor_b, motor_c, 94, 95)
 # This object initializes the color sensor on port 3
 color = ColorSensor(Port.S3)
 # This object initializes the gyro sensor on port 2
-gyro = GyroSensor(Port.S2)
+# gyro = GyroSensor(Port.S2)
 # This object initializes the ultrasonic sensor on port 4
-sonic = UltrasonicSensor(Port.S4)
+# sonic = UltrasonicSensor(Port.S4)
 # initialize function myblocks here
 
 # This function is our moveTank block which takes in the
@@ -94,7 +95,7 @@ def Step_counter(robot):
     wait(1000)
     robot.straight(70)
     dead_stop()
-    robot.turn(25)
+    robot.turn(15)
     dead_stop()
     robot.stop()
     robot.settings(300, 300, 200, 200)
@@ -107,9 +108,31 @@ def Step_counter(robot):
     dead_stop()
     robot.stop()
     robot.settings(900, 900, 200, 200)
-    robot.straight(-1090)
-    dead_stop()
+    # robot.straight(-500)
+    moveTank(-1560, 30, -400)
+    robot.turn(100)
+    robot.drive_time(100, 0, 1000)
+    robot.straight(-70)
+    robot.stop()
+    motor_b, motor_c = Motor(
+        Port.B, positive_direction=Direction.COUNTERCLOCKWISE), Motor(
+        Port.C, positive_direction=Direction.COUNTERCLOCKWISE)
+    robot = DriveBase(motor_b, motor_c, wheel_diameter=94.2, axle_track=95)
+    LineFollow(120, .5, robot, 750)
+    # robot.turn(28)
+    # robot.straight(150)
+    # robot.turn(-32)
+    # motor_d.run_time(-500, 1000, then=Stop.COAST, wait=False)
+    # robot.straight(125)
+    # wait(1000)
+    # motor_d.run_time(-200, 9500, then=Stop.COAST, wait=True)
+    # robot.straight(-200)
+    # robot.turn(-210)
+    # LineFollow(100, 1.0, robot, 400)
+    # LineFollow(20, 1.0, robot, 50)
+    # robot.straight(1000)
     return
+    dead_stop()
     robot.stop()
     robot.settings(1560, -300, 200, 200)
     motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
@@ -236,25 +259,36 @@ def boccia2(robot):
     # robot.turn(56)
     # dead_stop()
     robot.stop()
-    robot.settings(1560, 1500, 50, 100)
+    robot.settings(100, 100, 50, 100)
     motor_a.run_angle(1560, -150, then=Stop.HOLD, wait=False)
-    gyroStraight(700, 600)
+    gyroStraight(100, 600)
     robot.stop()
-    robot.straight(400)
+    robot.straight(200)
     dead_stop()
-    motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=False)
+    robot.stop()
+    robot.settings(1560, 1560, 50, 100)
+    robot.straight(200)
+    dead_stop()
+    motor_a.run_angle(1560, -200, then=Stop.HOLD, wait=False)
     robot.settings(200, 200, 100, 100)
     robot.straight(-50)
     robot.straight(-160)
     robot.turn(-135)
-    robot.straight(-320)
+    robot.straight(-300)
     robot.turn(-40)
     robot.straight(150)
     motor_a.run_angle(1560, -900, then=Stop.HOLD, wait=False)
     robot.straight(130)
     robot.stop()
     robot.straight(-200)
-    robot.turn(240)
+    robot.turn(-120)
+    while gyro.angle() != -270:
+        gyrodata = gyro.angle()
+        print(gyrodata)
+        print(-270 - gyrodata)
+        robot.turn(-270 - gyrodata)
+        print(gyro.angle())
+    return
     robot.straight(300)
     ultradata = sonic.distance()
     robot.straight(ultradata - 1234)
@@ -270,7 +304,6 @@ def boccia2(robot):
     robot.stop()
     # robot.straght(200)
     robot.stop()
-    return
     robot.turn(60)
     robot.straight(200)
     robot.turn(-95)
@@ -335,24 +368,25 @@ def main(robot):
     # while len(ev3.buttons.pressed()) == 0:
     #     pass
     # dropCubes()
-    # while len(ev3.buttons.pressed()) == 0:
-    #     pass
-    # wait(500)
-    # robot.straight(-20)
-    # Step_counter(robot)
+    while len(ev3.buttons.pressed()) == 0:
+        pass
+    wait(500)
+    robot.straight(-20)
+    Step_counter(robot)
     robot.stop()
     robot.settings(200, 200, 100, 100)
     while len(ev3.buttons.pressed()) == 0:
         pass
     robot.straight(80)
     dead_stop()
-    robot.turn(46)
+    robot.turn(49)
     dead_stop()
     boccia2(robot)
 
 
 # This runs our main function
 main(robot)
+# moveTank(-100, 10, -400)
 # print(color.reflection())
 # LineFollow(80, -.7, robot, 1000)
 # robot.stop()
@@ -364,7 +398,25 @@ main(robot)
 # # robot.straight(300)
 # robot.stop()
 # robot.settings(1560, -400, 0, 0)
-# robot.straight(1000)
+# robot.drive_time(-100, 0, 1000)
+# robot.straight(500)
+# robot.straight(-500)
 # gyroStraight(100, 100)
 # dead_stop()
-# print(sonic.distance())
+# print(gyro.angle())
+# robot.stop()
+# robot.settings(400, 400, 100, 100)
+# robot.drive_time(-100, 0, 1000)
+# motor_a.run_angle(1560, -100, then=Stop.HOLD, wait=True)
+# robot.straight(50)
+# while len(ev3.buttons.pressed()) == 0:
+#     pass
+# robot.turn(35)
+# robot.straight(850)
+# motor_a.run_angle(1560, -500, then=Stop.HOLD, wait=True)
+# motor_a.run_angle(1560, 500, then=Stop.HOLD, wait=True)
+# robot.straight(90)
+# while True:
+#     motor_a.run_angle(1560, -1000, then=Stop.HOLD, wait=True)
+#     motor_a.run_angle(1560, 1000, then=Stop.HOLD, wait=True)
+# robot.straight(500)
